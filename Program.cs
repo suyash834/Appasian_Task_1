@@ -6,10 +6,16 @@ using Backend.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Enable CORS for the frontend
+// Enable CORS for your Vercel frontend
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll",
-        policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+    options.AddPolicy("AllowFrontend", policy =>
+        policy
+            .WithOrigins("https://appasian-frontend-task1-1ds1.vercel.app") // your frontend URL
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials() // only if you send cookies or auth tokens
+    );
 });
 
 var app = builder.Build();
