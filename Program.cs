@@ -18,7 +18,7 @@ app.UseCors("AllowAll");
 // In-memory task list
 var tasks = new List<TaskItem>();
 
-// app.MapGet("/", () => "Hello World!");
+app.MapGet("/", () => "Hello World!");
 // GET /tasks - list all tasks
 app.MapGet("/tasks", () => Results.Ok(tasks));
 
