@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/suyashdixit/Projects/TaskManager.Api/TaskManager.Api.csproj",
+      "projectUniqueName": "/Users/suyashdixit/Projects/Backend-Task-1/TaskManager.Api.csproj",
       "projectName": "TaskManager.Api",
-      "projectPath": "/Users/suyashdixit/Projects/TaskManager.Api/TaskManager.Api.csproj",
+      "projectPath": "/Users/suyashdixit/Projects/Backend-Task-1/TaskManager.Api.csproj",
       "packagesPath": "/Users/suyashdixit/.nuget/packages/",
-      "outputPath": "/Users/suyashdixit/Projects/TaskManager.Api/obj/",
+      "outputPath": "/Users/suyashdixit/Projects/Backend-Task-1/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/suyashdixit/.nuget/NuGet/NuGet.Config"
