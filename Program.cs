@@ -5,30 +5,32 @@ using Backend.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Enable CORS for the frontend
 // Enable CORS for your Vercel frontend
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
         policy
-            .WithOrigins("https://appasian-frontend-task1-1ds1.vercel.app") // your frontend URL
+            .WithOrigins(
+                "https://appasian-frontend-task1-1ds1.vercel.app",
+                "http://localhost:5173"
+            )
             .AllowAnyMethod()
             .AllowAnyHeader()
-            .AllowCredentials() // only if you send cookies or auth tokens
+            .AllowCredentials()
     );
 });
 
 var app = builder.Build();
-app.UseCors("AllowAll");
+
+app.UseHttpsRedirection();
+app.UseCors("AllowFrontend"); 
 
 // In-memory task list
 var tasks = new List<TaskItem>();
 
 app.MapGet("/", () => "Hello World!");
-// GET /tasks - list all tasks
 app.MapGet("/tasks", () => Results.Ok(tasks));
 
-// POST /tasks - add a new task
 app.MapPost("/tasks", (TaskItem task) =>
 {
     task.Id = Guid.NewGuid();
@@ -36,7 +38,6 @@ app.MapPost("/tasks", (TaskItem task) =>
     return Results.Created($"/tasks/{task.Id}", task);
 });
 
-// PUT /tasks/{id} - toggle completion status
 app.MapPut("/tasks/{id}", (Guid id) =>
 {
     var task = tasks.FirstOrDefault(t => t.Id == id);
@@ -45,7 +46,6 @@ app.MapPut("/tasks/{id}", (Guid id) =>
     return Results.NoContent();
 });
 
-// DELETE /tasks/{id} - delete a task
 app.MapDelete("/tasks/{id}", (Guid id) =>
 {
     var task = tasks.FirstOrDefault(t => t.Id == id);
